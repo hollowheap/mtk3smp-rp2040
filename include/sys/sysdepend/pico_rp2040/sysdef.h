@@ -84,6 +84,19 @@
 #define	BOARD_LED_PIN		16
 
 /*
+ * GP0/GP1 carry UART0 (console copy + crash report) only when built with
+ * "make CRASH_REPORT=1" or CONSOLE=uart.  By default the build defines
+ * BOARD_UART0_FREE=1 and the console is on USB only, leaving them free.
+ *
+ * No other pin is configured at boot.  (The Pico W's on-board LED is on the
+ * radio, so applications that want an LED wire an external one to a free
+ * pin and set it up themselves with gpio_set_pin().)
+ */
+#ifndef BOARD_UART0_FREE
+#define	BOARD_UART0_FREE	0	/* 1: boot leaves GP0/GP1 alone */
+#endif
+
+/*
  * Startup checkpoint diagnostic.
  *
  * Set BOARD_DIAG_GPIO_SCAN to 1 to flash a numbered checkpoint on
