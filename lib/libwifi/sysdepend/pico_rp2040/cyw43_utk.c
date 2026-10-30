@@ -35,7 +35,7 @@
 #include "network_config.h"
 #endif
 
-#define CYW43_POLL_MS        10
+#define CYW43_POLL_MS        2
 /* Bounded so a reader can never wedge if the writer is starved; an exhausted
  * budget returns the last copy and is visible through status_retries. */
 #define CYW43_STATUS_READ_ATTEMPTS 16
