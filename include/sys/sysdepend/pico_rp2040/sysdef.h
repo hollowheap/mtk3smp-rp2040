@@ -78,10 +78,12 @@
  * Also already committed on this board: GP0/GP1 are the UART0 console, and
  * GP26..GP28 are the sample ADC driver's inputs when USE_SDEV_DRV is enabled.
  *
- * BOARD_LED_PIN is the external LED used as the liveness indicator.  Change
- * it to any free GPIO that has an LED attached.
+ * BOARD_LED_PIN is the external LED used as the liveness indicator.  The
+ * boot pin table does not configure it, so a pin used as an input elsewhere
+ * is never driven at reset.  Code that blinks this pin must make it an
+ * output itself.
  */
-#define	BOARD_LED_PIN		16
+#define	BOARD_LED_PIN		22
 
 /*
  * Startup checkpoint diagnostic.
@@ -101,6 +103,9 @@
  *
  * The mask covers GP2..GP22 and GP26..GP28: everything except the UART0
  * console (GP0/GP1) and the CYW43439 radio pins (GP23/24/25/29).
+ * Warning: enabling the scan drives every pin in the mask as an output,
+ * including pins that the application wires to sensor outputs or motor
+ * drivers.  Narrow the mask to a free pin before enabling it on a board.
  */
 #define	BOARD_DIAG_GPIO_SCAN	0
 #define	BOARD_DIAG_GPIO_MASK	0x1C7FFFFCUL

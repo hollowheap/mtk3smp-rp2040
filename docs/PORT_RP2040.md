@@ -123,7 +123,7 @@ failed; the corrected run passed.
 | Dynamic affinity | Task-to-processor assignment is static. |
 | Partitioned scheduling, EDF | Not implemented. |
 | Memory protection, execution budgets, temporal/fault isolation | Not implemented. |
-| On-board LED | The Pico W's LED is on the CYW43439 radio, not an RP2040 pin, so the liveness indicator is an external LED on `BOARD_LED_PIN` (GP16 by default, in `include/sys/sysdepend/pico_rp2040/sysdef.h`). GP23, GP24, GP25 and GP29 are reserved by the radio. |
+| On-board LED | The Pico W's LED is on the CYW43439 radio, not an RP2040 pin, so the liveness indicator is an external LED on `BOARD_LED_PIN` (GP22 by default, not set up by the boot pin table, in `include/sys/sysdepend/pico_rp2040/sysdef.h`). GP23, GP24, GP25 and GP29 are reserved by the radio. |
 
 ---
 
