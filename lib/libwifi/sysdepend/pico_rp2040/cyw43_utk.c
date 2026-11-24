@@ -31,6 +31,11 @@
 #if TM_WIFI_STATIC || TM_WIFI_DHCP
 #include "lwip_utk_ipv4.h"
 #endif
+
+#if TM_WIFI_NETIF
+/* Undefined by default; the application may supply a strong definition. */
+extern void cyw43_utk_app_poll(void) __attribute__((weak));
+#endif
 #if TM_WIFI_STATIC
 #include "network_config.h"
 #endif
@@ -545,6 +550,9 @@ void cyw43_utk_task(int32_t stacd, void *exinf)
 #if TM_WIFI_STATIC || TM_WIFI_DHCP
         lwip_utk_ipv4_poll(&cyw43_state.netif[CYW43_ITF_STA]);
         update_ipv4_status();
+#endif
+#if TM_WIFI_NETIF
+        if(cyw43_utk_app_poll != 0) cyw43_utk_app_poll();
 #endif
         radio_status.poll_count++;
         radio_status.scan_active = cyw43_wifi_scan_active(&cyw43_state);

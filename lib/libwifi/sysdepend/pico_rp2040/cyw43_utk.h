@@ -184,4 +184,9 @@ void cyw43_utk_get_status(T_CYW43_UTK_STATUS *status);
 void cyw43_utk_task(int32_t stacd, void *exinf);
 void cyw43_utk_link_state_changed(int up);
 
+/* Optional application hook.  The radio owner task calls this on every poll
+ * so raw lwIP users never run on a second context.  Applications that need
+ * lwIP TCP or UDP define it; the kernel fork leaves it undefined. */
+void cyw43_utk_app_poll(void);
+
 #endif
