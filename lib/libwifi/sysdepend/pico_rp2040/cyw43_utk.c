@@ -620,9 +620,6 @@ void cyw43_utk_task(int32_t stacd, void *exinf)
         lwip_utk_ipv4_poll(&cyw43_state.netif[CYW43_ITF_STA]);
         update_ipv4_status();
 #endif
-#if TM_WIFI_NETIF
-        if(cyw43_utk_app_poll != 0) cyw43_utk_app_poll();
-#endif
         radio_status.poll_count++;
         radio_status.scan_active = cyw43_wifi_scan_active(&cyw43_state);
         if(was_scanning && !radio_status.scan_active) {
@@ -634,6 +631,11 @@ void cyw43_utk_task(int32_t stacd, void *exinf)
 #endif
         status_publish_end();
         cyw43_utk_poll_requested = 0;
+#if TM_WIFI_NETIF
+        /* Run the app hook in driver context after status publication ends so
+         * cyw43_utk_get_status() reads a coherent snapshot without retrying. */
+        if(cyw43_utk_app_poll != 0) cyw43_utk_app_poll();
+#endif
         cyw43_thread_exit();
         (void)tk_dly_tsk(CYW43_POLL_MS);
     }
