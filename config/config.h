@@ -40,17 +40,18 @@
 
 #define CNF_TIMER_PERIOD	10	/* System timer period */
 
-/* Maximum number of kernel objects */
-#define CNF_MAX_TSKID		32	/* Task */
-#define CNF_MAX_SEMID		16	/* Semaphore */
-#define CNF_MAX_FLGID		16	/* Event flag */
-#define CNF_MAX_MBXID		4	/* Mailbox*/
-#define CNF_MAX_MTXID		4	/* Mutex */
-#define CNF_MAX_MBFID		4	/* Message buffer */
-#define CNF_MAX_MPLID		4	/* Memory pool */
-#define CNF_MAX_MPFID		4	/* Fixed size memory pool */
-#define CNF_MAX_CYCID		4	/* Cyclic handler */
-#define CNF_MAX_ALMID		4	/* Alarm handler */
+/* Pico-car uses 12 tasks and three cyclic handlers. Keep spare slots for
+   the board services while limiting the RAM reserved for object tables. */
+#define CNF_MAX_TSKID		14	/* Task */
+#define CNF_MAX_SEMID		8	/* Semaphore */
+#define CNF_MAX_FLGID		10	/* Event flag */
+#define CNF_MAX_MBXID		1	/* Mailbox*/
+#define CNF_MAX_MTXID		2	/* Mutex */
+#define CNF_MAX_MBFID		3	/* Message buffer */
+#define CNF_MAX_MPLID		1	/* Memory pool */
+#define CNF_MAX_MPFID		1	/* Fixed size memory pool */
+#define CNF_MAX_CYCID		6	/* Cyclic handler */
+#define CNF_MAX_ALMID		1	/* Alarm handler */
 
 /* Device configuration */
 #define CNF_MAX_REGDEV		(8)	/* Max registered device */
