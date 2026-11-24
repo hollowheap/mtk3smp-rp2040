@@ -19,12 +19,12 @@
  *	startup / shoutdown processing for hardware
  *	
  *	Pin function Setting (for RaspberryPi Pico W)
- *		BOARD_LED_PIN : GPIO out (external LED)
  *		P0   : UART0-TX
  *		P1   : UART0-RX
  *
+ *	BOARD_LED_PIN is not configured here; see the board sysdef.h.
  *	GP23/24/25/29 belong to the CYW43439 radio on the Pico W and are
- *	deliberately left alone here; see BOARD_LED_PIN in the board sysdef.h.
+ *	deliberately left alone here.
  */
 
 #include <kernel.h>
@@ -73,9 +73,6 @@ LOCAL const UW module_tbl[] = {
  * Setup pin functions Tadle
  */
 LOCAL const T_SETUP_REG pinfnc_tbl[] = {
-	/* External LED */
-	{GPIO_CTRL(BOARD_LED_PIN),	GPIO_CTRL_FUNCSEL_SIO},	/* LED pin GPIO */
-	{GPIO_OE, (1<<BOARD_LED_PIN)},				/* LED pin output enable */
 	/* P0,P1 : UART0 */
 	{GPIO_CTRL(0),	GPIO_CTRL_FUNCSEL_UART},	/* P0 UART0-TX */
 	{GPIO_CTRL(1),	GPIO_CTRL_FUNCSEL_UART},	/* P1 UART0-RX */

@@ -678,7 +678,7 @@ the GP16 LED against the bring-up table above; it tells you how far USB got.
 ### No LED activity
 
 The Pico W's on-board LED is on the radio chip and will not light in the
-radio-down profiles. Use an external LED on GP16, or change `BOARD_LED_PIN`
+radio-down profiles. Use an external LED on GP22, or change `BOARD_LED_PIN`
 in `include/sys/sysdepend/pico_rp2040/sysdef.h`. Avoid GP23, GP24, GP25 and
 GP29 - the radio reserves them.
 
